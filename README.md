@@ -23,7 +23,7 @@ The resources in this folder can be used to deploy the required cloud services i
 After deployment, you will have an Azure Data Lake Storage Gen 2 Registry, Azure Data Factory, Azure Key Vault, Azure SQL Server, and Azure SQL Dedicated Pool along with Log Analytics.
 
 Resources can also be deployed into your Azure Subscription by using this 
-[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https%3A%2F%2Fraw.githubusercontent.com%2FNealAnalyticsLLC%2FEnterprise-Data-Warehouse-AzureSynapse%2Fdev%2Fpiyush%2Fdeployment%2FARM%2520templates%2Fjson%2Fmain.json%3Ftoken%3DGHSAT0AAAAAABYM5LIQNU5DQQDO3GINDQKKYYYSBBQ) link.
+[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https%3A%2F%2Fraw.githubusercontent.com%2FNealAnalyticsLLC%2FEnterprise-Data-Warehouse-AzureSynapse%2Fdev%2Fpiyush%2Fdeployment%2FARM%2520templates%2Fjson%2Fmain.json) link.
 
 **NOTE (for deploying using PowerShell script):**
 
