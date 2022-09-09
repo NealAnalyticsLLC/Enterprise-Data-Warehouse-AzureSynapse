@@ -1509,3 +1509,197 @@
     }
   ]
 }
+
+{
+    "$schema": "https://schema.management.azure.com/schemas/0.1.2-preview/CreateUIDefinition.MultiVm.json#",
+    "handler": "Microsoft.Azure.CreateUIDef",
+    "version": "0.1.2-preview",
+    "parameters": {
+        "basics": [
+		
+			{
+				"name": "project_name",
+				"type": "Microsoft.Common.TextBox",
+				"label": "Project Name",
+                "placeholder": "Enter the Name for the Project",
+                "defaultValue": "",
+				"constraints": {
+                    "required": true
+				},
+                "visible": true
+			},
+			{
+				"name": "env",
+				"type": "Microsoft.Common.TextBox",
+				"label": "Enviornment",
+                "placeholder": "Enter the Enviornment for your Project",
+                "defaultValue": "dev",
+				"constraints": {
+                    "required": true
+				},
+                "visible": true
+			},
+			{
+                "name": "templatepipeline",
+                "type": "Microsoft.Common.OptionsGroup",
+                "label": "Deploy Template Pipeline",
+                "defaultValue": "No",
+                "toolTip": "",
+                "constraints": {
+                    "allowedValues": [
+                        {
+                            "label": "Yes",
+                            "value": "1"
+                        },
+                        {
+                            "label": "No",
+                            "value": "0"
+                        }
+                    ],
+                    "required": true
+                },
+                "visible": true
+            }
+			
+			
+        ],
+        "steps": [
+			{
+                "name": "azuresqlDB",
+                "label": "Azure SQL Database",
+                "bladeTitle": "Application credentials",
+                "subLabel": {
+                    "preValidation": "Provide credentials",
+                    "postValidation": "Great - let's move on!"
+                },
+				"elements": [
+					{
+						"name": "sql_admin_user",
+						"type": "Microsoft.Compute.UserNameTextBox",
+						"label": "SQL Admin User name",
+						"placeholder": "Enter the SQL admin username",
+						"defaultValue": "",
+						"toolTip": "",
+						"constraints": {
+							"required": true,
+							"regex": "^[a-z0-9A-Z]{1,30}$",
+							"validationMessage": "Only alphanumeric characters are allowed, and the value must be 1-30 characters long."
+						},
+						"osPlatform": "Windows",
+						"visible": true
+					},
+					{
+						"name": "sql_admin_password",
+						
+						"type": "Microsoft.Common.PasswordBox",
+						"label": {
+							"password": "Password",
+							"confirmPassword": "Confirm password"
+						},
+						"placeholder": "Password",
+						"toolTip": "",
+						"constraints": {
+							"required": true,
+							"regex": "^[a-zA-Z0-9]{8,}$",
+							"validationMessage": "Password must be at least 8 characters long, contain only numbers and letters"
+						},
+						"options": {
+							"hideConfirmation": false
+						},
+						"visible": true
+					},
+					{
+						"name": "servers_admin_sid",
+						"type": "Microsoft.Common.TextBox",
+						"label": "Server SID",
+						"placeholder": "Enter the Admin SID",
+						"defaultValue": "",
+						"toolTip": "Enter the Guid Server SID",
+						"constraints": {
+							"required": true,
+							"regex": "^[{]?[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}[}]?$",
+							"validationMessage": "Enter Valid ID"
+						},
+						"visible": true
+					},
+					{
+						"name": "servers_admin_name",
+						"type": "Microsoft.Common.TextBox",
+						"label": "Server Admin Name (Email)",
+						"placeholder": "Admin Email ID",
+						"defaultValue": "",
+						"toolTip": "Enter the Email Address",
+						"constraints": {
+							"required": true
+						},
+						"visible": true
+					}
+				
+				
+				]
+				
+			},
+			{
+                "name": "azuresqldw",
+                "label": "Azure SQL Data Warehouse",
+                "bladeTitle": "Application credentials",
+                "subLabel": {
+                    "preValidation": "Provide credentials",
+                    "postValidation": "Great - let's move on!"
+                },
+				"elements": [
+					{
+						"name": "sqldw_admin_user",
+						"type": "Microsoft.Compute.UserNameTextBox",
+						"label": "SQL-DW Admin User name",
+						"placeholder": "Enter the SQL-DW admin username",
+						"defaultValue": "",
+						"toolTip": "",
+						"constraints": {
+							"required": true,
+							"regex": "^[a-z0-9A-Z]{1,30}$",
+							"validationMessage": "Only alphanumeric characters are allowed, and the value must be 1-30 characters long."
+						},
+						"osPlatform": "Windows",
+						"visible": true
+					},
+					{
+						"name": "sqldw_admin_password",
+						"type": "Microsoft.Common.PasswordBox",
+						
+						"label": {
+							"password": "Password",
+							"confirmPassword": "Confirm password"
+						},
+						"placeholder": "Password",
+
+						"toolTip": "",
+						"constraints": {
+							"required": true,
+							"regex": "^[a-zA-Z0-9]{8,}$",
+							"validationMessage": "Password must be at least 8 characters long, contain only numbers and letters"
+						},
+						"options": {
+							"hideConfirmation": false
+						},
+						"visible": true
+					}
+				]
+			}
+		],
+        "outputs": {
+			
+           
+			"project_name": "[basic('project_name')]",
+			"env": "[basic('env')]",
+			"templatepipeline": "[basic('templatepipeline')]",
+			"sql_admin_user": "[steps('azuresqlDB').sql_admin_user]",
+			"sql_admin_password": "[steps('azuresqlDB').sql_admin_password.password]",
+			"servers_admin_sid": "[steps('azuresqlDB').servers_admin_sid]",
+			"servers_admin_name": "[steps('azuresqlDB').servers_admin_name]",
+			"sqldw_admin_user": "[steps('azuresqldw').sqldw_admin_user]",
+			"sqldw_admin_password": "[steps('azuresqldw').sqldw_admin_user.password]"
+			
+
+        }
+    }
