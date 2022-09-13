@@ -2,7 +2,7 @@
 
 ## Introduction
 
-The primary goal is to build an enterprise data warehouse solution using Azure services to accelerate an organization’s journey to build their BI dashboards. The Process of Deploying the Resources and configurations will be taken care of automatically. For Example, The Data Factory required for the Movement and Transformation of Data with Azure Data Lake Storage will be Deployed with the Required Configurations. 
+The primary goal is to build an enterprise data warehouse solution using Azure services to accelerate an organization’s journey to build their BI dashboards. The process of deploying the resources and configurations will be taken care of automatically. For example, the Data Factory required for the movement and transformation of data with Azure Data Lake Storage will be deployed with the required configurations. And just after creating the necessary pipelines for the transformation of the data your data will be ready to use in Power BI, Azure DB or in Azure ML.
 
 ## Logical Architecture – 
  ![Logical Architecture](https://github.com/NealAnalyticsLLC/Enterprise-Data-Warehouse-AzureSynapse/blob/dev/piyush/images/Logical%20Architecture.png)
@@ -129,7 +129,7 @@ Following Private endpoints will be created for the following resources
 #### 1.	Meta Data SQL Database 
 You need to run the SQL script shared with code in Azure SQL DB to create below meta data tables.
 
-** ER Diagram –**
+**ER Diagram –**
 ![MetaData Tables](https://github.com/NealAnalyticsLLC/Enterprise-Data-Warehouse-AzureSynapse/blob/dev/piyush/images/MetaData%20Tables.png)
  
 1. **SourceToStaging** – Purpose of this table is to store source related details and data lake storage details which will be useful in data pipeline to copy data from source to ADLS. 
@@ -161,7 +161,7 @@ INSERT INTO [dbo].[DataValidation] ([Id], [DataSource], [ValidationRule], [Valid
 VALUES ('1', 'SQL', 'primary key column cannot be null or blank ',"toString(isNull(toString(byName('AddressId'))))", 'AddressId', 'Address.parquet', 'AdventureWorks', 'Cleansed', 'Address')
 ```
 
-5. **ActivityLogs** – This table will store the logs of copy activities used to copy data from the source and logs of pipeline execution. 
+5. **ActivityLogs** – This table will store the logs of activities executed in pipeline and logs of pipeline execution. 
 Example:
 ```
 INSERT INTO [dbo].[ActivityLogs] ([activity_id], [activity_name], [activity_type], [pipeline_id], [pipeline_name], [pipeline_run_id], [trigger_id], [event_status], [pipeline_exe_status], [rows_processed], [started_dttm], [finished_dttm], [datetime_created], [datetime_modified], [updated_by])
@@ -195,8 +195,8 @@ https://docs.microsoft.com/en-us/azure/data-factory/concepts-integration-runtime
 	
 	![Key vault](https://github.com/NealAnalyticsLLC/Enterprise-Data-Warehouse-AzureSynapse/blob/dev/piyush/images/Key%20vault.png)
 	
-You can refer below link for creation of linked service –
-https://docs.microsoft.com/en-us/azure/data-factory/concepts-linked-services?tabs=data-factory
+	You can refer below link for creation of linked service –
+	https://docs.microsoft.com/en-us/azure/data-factory/concepts-linked-services?tabs=data-factory
 
 3. Create new datasets for source and sink. Source dataset will point to the source and use linked service created in previous step. And sink dataset will point to ADLS linked service created through deployment.
 Follow below link for more details about creating dataset.
