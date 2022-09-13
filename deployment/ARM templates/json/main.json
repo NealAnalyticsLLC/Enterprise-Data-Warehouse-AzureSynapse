@@ -5,18 +5,10 @@
     "_generator": {
       "name": "bicep",
       "version": "0.4.1318.3566",
-      "templateHash": "7863080856248151795"
+      "templateHash": "794452247730349945"
     }
   },
   "parameters": {
-    "subscriptionId": {
-      "type": "string",
-      "defaultValue": "[subscription().subscriptionId]"
-    },
-    "tenantId": {
-      "type": "string",
-      "defaultValue": "[subscription().tenantId]"
-    },
     "deploymentLocation": {
       "type": "string",
       "defaultValue": "eastus"
@@ -34,7 +26,7 @@
       "defaultValue": "sqladmin"
     },
     "SqlAdminPassword": {
-      "type": "string",
+      "type": "secureString",
       "defaultValue": "SASql1234!"
     },
     "SqlDwAdminUser": {
@@ -42,7 +34,7 @@
       "defaultValue": "sqldwadmin"
     },
     "SqlDwAdminPassword": {
-      "type": "string",
+      "type": "secureString",
       "defaultValue": "SASql1234!"
     },
     "servers_admin_sid": {
@@ -55,6 +47,8 @@
     }
   },
   "variables": {
+    "subscriptionId": "[subscription().subscriptionId]",
+    "tenantId": "[subscription().tenantId]",
     "resourceprefix": "[take(uniqueString(deployment().name), 5)]"
   },
   "resources": [
@@ -112,7 +106,7 @@
             "value": "[parameters('Environment')]"
           },
           "subscriptionId": {
-            "value": "[parameters('subscriptionId')]"
+            "value": "[variables('subscriptionId')]"
           },
           "location": {
             "value": "[parameters('deploymentLocation')]"
@@ -474,7 +468,7 @@
             "value": "[parameters('servers_admin_name')]"
           },
           "tenantId": {
-            "value": "[parameters('tenantId')]"
+            "value": "[variables('tenantId')]"
           },
           "project_name": {
             "value": "[parameters('projectName')]"
@@ -501,7 +495,7 @@
             "value": "[reference(extensionResourceId(format('/subscriptions/{0}/resourceGroups/{1}', subscription().subscriptionId, format('rg-{0}-datalanding-dev-001', parameters('projectName'))), 'Microsoft.Resources/deployments', format('synapse-{0}', variables('resourceprefix')))).outputs.sqldw_server_name.value]"
           },
           "subscriptionId": {
-            "value": "[parameters('subscriptionId')]"
+            "value": "[variables('subscriptionId')]"
           },
           "location": {
             "value": "[parameters('deploymentLocation')]"
@@ -830,7 +824,7 @@
             "value": "[parameters('servers_admin_sid')]"
           },
           "tenantId": {
-            "value": "[parameters('tenantId')]"
+            "value": "[variables('tenantId')]"
           },
           "log_analytics_workspace_id": {
             "value": "[reference(extensionResourceId(format('/subscriptions/{0}/resourceGroups/{1}', subscription().subscriptionId, format('rg-{0}-management-dev-001', parameters('projectName'))), 'Microsoft.Resources/deployments', format('monitoring-{0}', variables('resourceprefix')))).outputs.log_analytics_workspace_id.value]"
@@ -1437,7 +1431,7 @@
         "mode": "Incremental",
         "parameters": {
           "subscriptionId": {
-            "value": "[parameters('subscriptionId')]"
+            "value": "[variables('subscriptionId')]"
           },
           "adf_name": {
             "value": "[reference(extensionResourceId(format('/subscriptions/{0}/resourceGroups/{1}', subscription().subscriptionId, format('rg-{0}-datalanding-dev-001', parameters('projectName'))), 'Microsoft.Resources/deployments', format('adf-{0}', variables('resourceprefix')))).outputs.adf_name.value]"
