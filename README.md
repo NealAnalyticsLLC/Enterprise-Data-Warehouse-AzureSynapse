@@ -232,7 +232,7 @@ Following are the steps to connect Synapse in power BI –
 # Recommendations
 ## 1. **Performance**
 - **Synapse Dedicated Pool** - Pause the synapse dedicated SQL pool after completion of pipeline execution and resume the pool in the start of pipeline execution. It will help to reduce the azure cost. For example, you can create ADF pipeline using code snippet included in below document.  
-[Code for Pipeline to pause or resume Synapse ]()
+[Code for Pipeline to pause or resume Synapse ](https://github.com/NealAnalyticsLLC/Enterprise-Data-Warehouse-AzureSynapse/blob/dev/piyush/Code%20for%20Pipeline%20to%20pause%20or%20resume%20Synapse#L3)
 
 - **Pipeline Categorization** - Categorize pipelines based on their trigger time and on the type of data source. It is better to reduce dependencies between the master pipeline and child pipelines. 
 
