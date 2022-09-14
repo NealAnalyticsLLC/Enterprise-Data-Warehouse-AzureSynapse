@@ -1,5 +1,3 @@
-# Copyright (c) Microsoft Corporation.
-# Licensed under the MIT license.
 
 param(
     [Parameter(Mandatory= $True,
@@ -20,7 +18,7 @@ az login
 az account set --subscription $subscriptionID
 Write-Host "Switched subscription to '$subscriptionID' `r`n" -ForegroundColor Yellow
 
-Write-Host "Started deploying Blockchain and NFT Service resources.....`r`n" -ForegroundColor Yellow
+Write-Host "Started deploying Enterprise BI resources.....`r`n" -ForegroundColor Yellow
 az deployment sub create --location "$location" --template-file .\main.bicep
 
 Write-Host "All resources are deployed successfully.....`r`n" -ForegroundColor Green
