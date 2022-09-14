@@ -5,7 +5,7 @@
     "_generator": {
       "name": "bicep",
       "version": "0.4.1318.3566",
-      "templateHash": "794452247730349945"
+      "templateHash": "16705934372327458421"
     }
   },
   "parameters": {
@@ -15,7 +15,7 @@
     },
     "projectName": {
       "type": "string",
-      "defaultValue": "ndpftest"
+      "defaultValue": "enterprisebitest"
     },
     "Environment": {
       "type": "string",
@@ -29,19 +29,19 @@
       "type": "secureString",
       "defaultValue": "SASql1234!"
     },
-    "SqlDwAdminUser": {
+    "SqlDatawarehouseAdminUser": {
       "type": "string",
       "defaultValue": "sqldwadmin"
     },
-    "SqlDwAdminPassword": {
+    "SqlDatawarehouseAdminPassword": {
       "type": "secureString",
       "defaultValue": "SASql1234!"
     },
-    "servers_admin_sid": {
+    "SqlServerSID": {
       "type": "string",
       "defaultValue": "356cbc1d-a189-4950-957b-3460e4714eb6"
     },
-    "servers_admin_name": {
+    "SqlServerAdminName": {
       "type": "string",
       "defaultValue": "piyush@nealanalytics.com"
     }
@@ -462,10 +462,10 @@
         "mode": "Incremental",
         "parameters": {
           "servers_admin_sid": {
-            "value": "[parameters('servers_admin_sid')]"
+            "value": "[parameters('SqlServerSID')]"
           },
           "servers_admin_name": {
-            "value": "[parameters('servers_admin_name')]"
+            "value": "[parameters('SqlServerAdminName')]"
           },
           "tenantId": {
             "value": "[variables('tenantId')]"
@@ -483,10 +483,10 @@
             "value": "[parameters('SqlAdminPassword')]"
           },
           "sqldw_admin_user": {
-            "value": "[parameters('SqlDwAdminUser')]"
+            "value": "[parameters('SqlDatawarehouseAdminUser')]"
           },
           "sqldw_admin_password": {
-            "value": "[parameters('SqlDwAdminPassword')]"
+            "value": "[parameters('SqlDatawarehouseAdminPassword')]"
           },
           "sqldw_server_name": {
             "value": "[reference(extensionResourceId(format('/subscriptions/{0}/resourceGroups/{1}', subscription().subscriptionId, format('rg-{0}-datalanding-dev-001', parameters('projectName'))), 'Microsoft.Resources/deployments', format('synapse-{0}', variables('resourceprefix')))).outputs.sqldw_server_name.value]"
@@ -514,7 +514,7 @@
             "_generator": {
               "name": "bicep",
               "version": "0.4.1318.3566",
-              "templateHash": "3105870418032494030"
+              "templateHash": "5364596751197910623"
             }
           },
           "parameters": {
@@ -535,11 +535,7 @@
             },
             "vaults_BIKeyVault_name": {
               "type": "string",
-              "defaultValue": "[format('kv{0}{1}777', parameters('project_name'), parameters('env'))]"
-            },
-            "storageAccounts_datalake_name": {
-              "type": "string",
-              "defaultValue": "[format('dls{0}{1}', parameters('project_name'), parameters('env'))]"
+              "defaultValue": "[format('kv{0}{1}001', parameters('project_name'), parameters('env'))]"
             },
             "log_analytics_workspace_id": {
               "type": "string"
@@ -812,16 +808,16 @@
             "value": "[parameters('SqlAdminUser')]"
           },
           "sqldw_admin_password": {
-            "value": "[parameters('SqlDwAdminPassword')]"
+            "value": "[parameters('SqlDatawarehouseAdminPassword')]"
           },
           "location": {
             "value": "[parameters('deploymentLocation')]"
           },
           "servers_admin_name": {
-            "value": "[parameters('servers_admin_name')]"
+            "value": "[parameters('SqlServerAdminName')]"
           },
           "servers_admin_sid": {
-            "value": "[parameters('servers_admin_sid')]"
+            "value": "[parameters('SqlServerSID')]"
           },
           "tenantId": {
             "value": "[variables('tenantId')]"
@@ -1299,7 +1295,7 @@
             "_generator": {
               "name": "bicep",
               "version": "0.4.1318.3566",
-              "templateHash": "3169693412681423392"
+              "templateHash": "343154927286186685"
             }
           },
           "parameters": {
@@ -1329,7 +1325,7 @@
             },
             "vaults_BIKeyVault_name": {
               "type": "string",
-              "defaultValue": "[format('kvpurview{0}104', parameters('env'))]"
+              "defaultValue": "[format('kvpurview{0}{1}', parameters('project_name'), parameters('env'))]"
             },
             "tenantId": {
               "type": "string",
