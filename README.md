@@ -41,33 +41,33 @@ On the top you’ll see several parameters defined as follows:
 1. **param deploymentlocation string = '<deployment-location>'**
 This parameter is for the location of the deployment to take place, that is in which Azure region you wish to deploy the resources. Replace <deployment-location> with the value of location you want.
 For e.g., if you want to deploy in EAST US then it will be
-**param deploymentlocation string = 'eastus'**
+**param deploymentLocation string = 'eastus'**
 
-2. **param project_name string = '<project-name>'**
+2. **param projectName string = '<project-name>'**
 This parameter is for the name of the project that you want to give. Replace **<project-name>** with the name of project you want.
 
-3. **param env string ='<environment of development>'**
+3. **param Environment string ='<environment of development>'**
 This parameter is for the environment of the development the resources are in. Replace **<environment of development>** with the environment of development for e.g.,
 **dev** for Development environment, **uat** for testing environment and **prod** for Production environment.
 
-4. **param sql_admin_user string = '<sqldbserver-user-id>'**
+4. **param SqlAdminUser string = '<sqldbserver-user-id>'**
 This parameter is for the username of the SQL db server admin that you want to give. 
 Replace **<sqldbserver-user-id>** with any username of your choice.
-For e.g.,  **param sql_admin_user string = 'sqladmin'**
+For e.g.,  **param SqlAdminUser string = 'sqladmin'**
 
-5. **param sql_admin_password string = '<sqldbserver-password>'**
+5. **param SqlAdminPassword string = '<sqldbserver-password>'**
 This parameter is for the password of the sql db server that you want to give. 
 Replace **<sqldbserver-password>** with any username of your choice. Please follow this [link](https://docs.microsoft.com/en-us/sql/relational-databases/security/password-policy?view=sql-server-ver16) to check the password policy for Azure SQL Server.
 
-6. **param sqldw_admin_user string = '<sql-dedicatedpool-server-user-id>'**
+6. **param SqlDatawarehouseAdminUser string = '<sql-dedicatedpool-server-user-id>'**
 This parameter is for the username of the dedicated SQL pool server admin that you want to give. 
 Replace **<sql-dedicatedpool-server-user-id>** with any username of your choice.
-For e.g., **param sqldw_admin_user string = 'sqldwadmin'**
+For e.g., **param SqlDatawarehouseAdminUser string = 'sqldwadmin'**
 
-7. **param sqldw_admin_password string = '<sql-dedicatedpool-server-password>'**
+7. **param SqlDatawarehouseAdminPassword string = '<sql-dedicatedpool-server-password>'**
 This parameter is for the password of the dedicated SQL pool server that you want to give. Replace **<sql-dedicatedpool-server-password>** with any username of your choice. Please follow this [link](https://docs.microsoft.com/en-us/sql/relational-databases/security/password-policy?view=sql-server-ver16) to check the password policy.
 
-8. **param servers_admin_sid string = '<sql-sever-admin-sid>'**
+8. **param SqlServerSID string = '<sql-sever-admin-sid>'**
 This parameter is for the SID of the SQL Server Admin that is required for setting up Azure Active Directory login for SQL Server. Replace **<sql-sever-admin-sid>** with the SID of the person that you want to keep as admin.
 Retrieve the **Active Directory SID** (object ID) of the admin from **Azure Active Directory** (AAD) section on **Azure Portal** as follows	
     	
@@ -86,7 +86,7 @@ Retrieve the **Active Directory SID** (object ID) of the admin from **Azure Acti
 	
 		![Overview](https://github.com/NealAnalyticsLLC/Enterprise-Data-Warehouse-AzureSynapse/blob/dev/piyush/images/Overview.png)
 
-9. **param servers_admin_name string = '<sql-server-admin-emailid>'**
+9. **param SqlServerAdminName string = '<sql-server-admin-emailid>'**
 This parameter is for the email-id of the SQL Server Admin that is required for setting up Azure Active Directory login for SQL Server. Replace **<sql-server-admin-emailid>** with the email-id of the person that you want to keep as admin.
 
 ## Configuration
