@@ -38,7 +38,7 @@ Step 1:
 Open the main.bicep file from the downloaded package.
 On the top you’ll see several parameters defined as follows:
 
-1. **param deploymentlocation string = '<deployment-location>'**
+1. **param deploymentLocation string = '<deployment-location>'**
 This parameter is for the location of the deployment to take place, that is in which Azure region you wish to deploy the resources. Replace <deployment-location> with the value of location you want.
 For e.g., if you want to deploy in EAST US then it will be
 **param deploymentLocation string = 'eastus'**
