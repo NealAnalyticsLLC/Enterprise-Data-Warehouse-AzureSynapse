@@ -50,7 +50,7 @@ This parameter is for the name of the project that you want to give(can be an ab
 This parameter is for the environment of the development the resources are in. Replace **<environment of development>** with the environment of development for e.g.,
 **dev** for Development environment, **uat** for testing environment and **prod** for Production environment.
 	
-	**NOTE**: The parameters **projectName** and **Environment** value should only have lowercase letters, no numbers, no special characters and shouldn't be more than 5-10 letters.
+	**NOTE**: The parameters **projectName** and **Environment** value should only have lowercase letters and numbers, no special characters allowed and shouldn't be more than 5-10 letters.
 
 
 4. **param SqlAdminUser string = '<sqldbserver-user-id>'**
