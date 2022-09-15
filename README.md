@@ -134,21 +134,6 @@ VALUES ('AddressID', 'AddressLine1,City,StateProvince,CountryRegion', 'DateModif
 'Cleansed', 'AdventureWorks', 'Address.parquet', 'ADLSConnection', 'dim', 'Address', 'SynapseConnection','1')
 ```
 
-
-4. **DataValidation** – This table will store all the data required for validation of data copied from source. 
-Example:
-```
-INSERT INTO [dbo].[DataValidation] ([Id], [DataSource], [ValidationRule], [ValidationCondition], [ColumnName], [FileName], [DirectoryName], [ContainerName], [TableName])
-VALUES ('1', 'SQL', 'primary key column cannot be null or blank ',"toString(isNull(toString(byName('AddressId'))))", 'AddressId', 'Address.parquet', 'AdventureWorks', 'Cleansed', 'Address')
-```
-
-5. **ActivityLogs** – This table will store the logs of activities executed in pipeline and logs of pipeline execution. 
-Example:
-```
-INSERT INTO [dbo].[ActivityLogs] ([activity_id], [activity_name], [activity_type], [pipeline_id], [pipeline_name], [pipeline_run_id], [trigger_id], [event_status], [pipeline_exe_status], [rows_processed], [started_dttm], [finished_dttm], [datetime_created], [datetime_modified], [updated_by])
-VALUES ('f2068677-4d6e-45bc-b9d2-5a2bcd730a87', 'cp_sql_data_to_staging', 'copy activity', 'fe6b50cc-07c4-4043-abb5-c976996db009', 'PL_SQL_Source_To_Synapse', 'd774c88b-3ddd-4305-b54b-1382d056b407', 'b54f5cf6-9853-4422-9562-f8e15718dc5f', 'Succeeded', 'Succeeded', '15', '2022-04-07 05:40:59.363', '2022-04-07 05:40:59.363', '2022-04-07 05:40:59.363', '2022-04-07 05:40:59.363','org\user1')
-```
-
 #### 2.	Key vault Secrets:
 You will need to add one more secret for connecting to the data source. For example, if your data source is On-Prem SQL server then value of secret will be in following format:
 Server=servername;Database=DBName;User Id=username;Password=Pswd;
