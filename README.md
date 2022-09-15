@@ -1,11 +1,10 @@
 # Overview
 
-## Introduction
+## Enterprise Data Warehouse - Azure Synapse 
 
-###  Enterprise Data Warehouse - Azure Synapse 
 This repository contains code to accelerate an organization’s journey to build its BI dashboards. The process of deploying the resources and configurations will be taken care of automatically. For example, the Data Factory required for the movement and transformation of data with Azure Data Lake Storage will be deployed with the required configurations. And just after creating the necessary pipelines for the transformation of the data your data will be ready to use in Power BI, Azure DB, or in Azure ML.
 
-## Logical Architecture – 
+## Logical Architecture 
  ![Logical Architecture](https://github.com/NealAnalyticsLLC/Enterprise-Data-Warehouse-AzureSynapse/blob/dev/piyush/images/Logical%20Architecture.png)
 - **Azure Data Factory** uses the metadata stored in **Azure SQL DB** and pulls data from different data sources.
 - Azure Data Factory stores all the source data into **Data Lake** Raw zone. After some transformations, data gets stored in Data Lake Bronze and Silver zone.
@@ -19,7 +18,7 @@ In order to successfully deploy this solution, you will need to have access to t
 - [Azure CLI installed](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli)- Required for deployment scripts to be run locally (optional)
 - Deployment Parameters (Follow steps mentioned in the next **Deployment Parameters** section)
 
-## AZURE RESOURCES DEPLOYMENT
+## Azure Resource Deployment
 The resources in this folder can be used to deploy the required cloud services into your Azure Subscription. This can be done either via the [Azure Portal](https://portal.azure.com) or using the below button: 
 
 [![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FNealAnalyticsLLC%2FEnterprise-Data-Warehouse-AzureSynapse%2Fdev%2Fpiyush%2Fdeployment%2FARM%2520templates%2Fjson%2Fmain.json%3Ftoken%3DGHSAT0AAAAAABYM5LIRHLC3G4TQG4YVDQDYYZCWVTA)
@@ -166,8 +165,8 @@ Server=servername;Database=DBName;User Id=username;Password=Pswd;
 	- **Step 3:** Do the same for rest of the resources, Azure SQL DB Server, Azure Key Vault and Azure Dedication SQL Pool Server
 
 
-## Data Pipelines 
-### How to build a pipeline -
+# Data Pipelines 
+## How to build a pipeline
 	
 Consider, you are creating pipeline for On Premises SQL server as source, then basic steps of pipeline creation will be as follows:
 1. Create Integration Runtime based on access to your source. You can refer following link for creating Integration Runtime.
