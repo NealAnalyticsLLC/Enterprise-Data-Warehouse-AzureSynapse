@@ -29,45 +29,45 @@ After deployment, you will have an Azure Data Lake Storage Gen 2 Registry, Azure
 
 ## Deployment Parameters
 
-1. **param deploymentLocation string = '<deployment-location>'**
+1. **param deploymentLocation string = '\<deployment-location>'**
 This parameter is for the location of the deployment to take place, that is in which Azure region you wish to deploy the resources. Replace <deployment-location> with the value of location you want.
 For e.g., if you want to deploy in EAST US then it will be
 **param deploymentLocation string = 'eastus'**
 
-2. **param projectName string = '<project-name>'**
+2. **param projectName string = '\<project-name>'**
 This parameter is for the name of the project that you want to give(can be an abbreviation too). Replace **<project-name>** with the name of project you want.
 
-3. **param Environment string ='<environment of development>'**
+3. **param Environment string ='\<environment of development>'**
 This parameter is for the environment of the development the resources are in. Replace **<environment of development>** with the environment of development for e.g.,
 **dev** for Development environment, **uat** for testing environment and **prod** for Production environment.
 	
 	**NOTE**: The parameters **projectName** and **Environment** value should only have lowercase letters and numbers, no special characters allowed and shouldn't be more than 5-10 letters.
 
 
-4. **param SqlAdminUser string = '<sqldbserver-user-id>'**
+4. **param SqlAdminUser string = '\<sqldbserver-user-id>'**
 This parameter is for the username of the SQL db server admin that you want to give. 
 Replace **<sqldbserver-user-id>** with any username of your choice.
 For e.g.,  **param SqlAdminUser string = 'sqladmin'**
 
-5. **param SqlAdminPassword string = '<sqldbserver-password>'**
+5. **param SqlAdminPassword string = '\<sqldbserver-password>'**
 This parameter is for the password of the sql db server that you want to give. 
 Replace **<sqldbserver-password>** with any username of your choice. Please follow this [link](https://docs.microsoft.com/en-us/sql/relational-databases/security/password-policy?view=sql-server-ver16) to check the password policy for Azure SQL Server.
 
-6. **param SqlDatawarehouseAdminUser string = '<sql-dedicatedpool-server-user-id>'**
+6. **param SqlDatawarehouseAdminUser string = '\<sql-dedicatedpool-server-user-id>'**
 This parameter is for the username of the dedicated SQL pool server admin that you want to give. 
 Replace **<sql-dedicatedpool-server-user-id>** with any username of your choice.
 For e.g., **param SqlDatawarehouseAdminUser string = 'sqldwadmin'**
 
-7. **param SqlDatawarehouseAdminPassword string = '<sql-dedicatedpool-server-password>'**
+7. **param SqlDatawarehouseAdminPassword string = '\<sql-dedicatedpool-server-password>'**
 This parameter is for the password of the dedicated SQL pool server that you want to give. Replace **<sql-dedicatedpool-server-password>** with any username of your choice. Please follow this [link](https://docs.microsoft.com/en-us/sql/relational-databases/security/password-policy?view=sql-server-ver16) to check the password policy.
 
-8. **param SqlServerSID string = '<sql-sever-admin-sid>'**
+8. **param SqlServerSID string = '\<sql-sever-admin-sid>'**
 It's the Object Id of User/Group and can be obtained from Azure Active Directory -> Users/Groups ->   Replace **<sql-sever-admin-sid>** with the SID of the person that you want to keep as admin.
 	* Copy the **Object ID** from below, also known as the **SID** and paste it in the parameter section.
 	
 		![Overview](https://github.com/NealAnalyticsLLC/Enterprise-Data-Warehouse-AzureSynapse/blob/dev/piyush/images/Overview.png)
 
-9. **param SqlServerAdminName string = '<sql-server-admin-emailid>'**
+9. **param SqlServerAdminName string = '\<sql-server-admin-emailid>'**
 This parameter is for the email-id of the SQL Server Admin that is required for setting up Azure Active Directory login for SQL Server. Replace **<sql-server-admin-emailid>** with the email-id of the person that you want to keep as admin.
 
 ## Configuration
@@ -107,7 +107,7 @@ Following Private endpoints will be created for the following resources
 
 
 ### The following configurations are required and needs to be done after deployment
-#### 1.	Meta Data SQL Database 
+#### 1.	Meta Data SQL Database:
 You need to run the SQL script shared with code in Azure SQL DB to create below meta data tables.
 
 **ER Diagram –**
@@ -149,11 +149,11 @@ INSERT INTO [dbo].[ActivityLogs] ([activity_id], [activity_name], [activity_type
 VALUES ('f2068677-4d6e-45bc-b9d2-5a2bcd730a87', 'cp_sql_data_to_staging', 'copy activity', 'fe6b50cc-07c4-4043-abb5-c976996db009', 'PL_SQL_Source_To_Synapse', 'd774c88b-3ddd-4305-b54b-1382d056b407', 'b54f5cf6-9853-4422-9562-f8e15718dc5f', 'Succeeded', 'Succeeded', '15', '2022-04-07 05:40:59.363', '2022-04-07 05:40:59.363', '2022-04-07 05:40:59.363', '2022-04-07 05:40:59.363','org\user1')
 ```
 
-#### 2.	Key vault Secrets – 
+#### 2.	Key vault Secrets:
 You will need to add one more secret for connecting to the data source. For example, if your data source is On-Prem SQL server then value of secret will be in following format:
 Server=servername;Database=DBName;User Id=username;Password=Pswd;
 
-#### 3.	Managed private endpoint approval
+#### 3.	Managed private endpoint approval:
 
 - The data resources **ADLS**, **Azure SQL DB Server** and **Azure Dedication SQL Pool Server** and **Azure Key Vault** are under ADF managed virtual network for added security.
 - After the ARM template deployment is done, we must approve the managed private endpoints that will be created, to include the resources under the virtual network.
@@ -197,7 +197,7 @@ There are 4 types of pipelines that can be build depending on the requirements.
 
 # Report Development
 ## How to use Synapse in Power BI
-Following are the steps to connect Synapse in power BI –
+Following are the steps to connect Synapse in power BI.
 1.	In Power BI Desktop click on Get data and then select Azure SQL Database as a source.
 	
 	![get data](https://github.com/NealAnalyticsLLC/Enterprise-Data-Warehouse-AzureSynapse/blob/dev/piyush/images/get%20data.png)
