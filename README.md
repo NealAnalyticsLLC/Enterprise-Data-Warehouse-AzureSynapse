@@ -72,7 +72,7 @@ This parameter is for the email-id of the SQL Server Admin that is required for 
 
 ## Configuration
 ### The following configurations are required and automatically gets created with deployment
-#### 1.	Key vault Secrets – 
+#### 1.	Key vault Secrets: 
 The following secrets would be created in key vault with deployment.
 - AzureSQLDBConnection - Required to connect Azure SQL DB
 - SynDBConnection - Required to connect Synapse database
@@ -106,7 +106,7 @@ Following Private endpoints will be created for the following resources
 - Provided username/password is used to create the connection string for DBs for ADF linked services
 
 
-### The following configurations are required and needs to be done after deployment -
+### The following configurations are required and needs to be done after deployment
 #### 1.	Meta Data SQL Database 
 You need to run the SQL script shared with code in Azure SQL DB to create below meta data tables.
 
