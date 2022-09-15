@@ -70,7 +70,7 @@ It's the Object Id of User/Group and can be obtained from Azure Active Directory
 9. **param SqlServerAdminName string = '\<sql-server-admin-emailid>'**
 This parameter is for the email-id of the SQL Server Admin that is required for setting up Azure Active Directory login for SQL Server. Replace **<sql-server-admin-emailid>** with the email-id of the person that you want to keep as admin.
 
-## Configuration
+## Configurations
 ### The following configurations are required and automatically gets created with deployment
 #### 1.	Key vault Secrets: 
 The following secrets would be created in key vault with deployment.
