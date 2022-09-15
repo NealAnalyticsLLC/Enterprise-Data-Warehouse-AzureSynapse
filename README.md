@@ -2,41 +2,33 @@
 
 ## Introduction
 
-The primary goal is to build an enterprise data warehouse solution using Azure services to accelerate an organization’s journey to build their BI dashboards. The process of deploying the resources and configurations will be taken care of automatically. For example, the Data Factory required for the movement and transformation of data with Azure Data Lake Storage will be deployed with the required configurations. And just after creating the necessary pipelines for the transformation of the data your data will be ready to use in Power BI, Azure DB or in Azure ML.
+###  Enterprise Data Warehouse - Azure Synapse 
+This repository contains code to accelerate an organization’s journey to build its BI dashboards. The process of deploying the resources and configurations will be taken care of automatically. For example, the Data Factory required for the movement and transformation of data with Azure Data Lake Storage will be deployed with the required configurations. And just after creating the necessary pipelines for the transformation of the data your data will be ready to use in Power BI, Azure DB, or in Azure ML.
 
 ## Logical Architecture – 
  ![Logical Architecture](https://github.com/NealAnalyticsLLC/Enterprise-Data-Warehouse-AzureSynapse/blob/dev/piyush/images/Logical%20Architecture.png)
-- **Azure Data Factory** use the metadata stored in **Azure SQL DB** and pull data from different data sources.
-- Azure Data Factory stores all the source data into **Data Lake** Raw zone. After some transformations, data gets stored into Data Lake Bronze and Silver zone.
-- Using **Synapse**, Data Factory do some transformations and final data gets stored into Synapse Datawarehouse.
+- **Azure Data Factory** uses the metadata stored in **Azure SQL DB** and pulls data from different data sources.
+- Azure Data Factory stores all the source data into **Data Lake** Raw zone. After some transformations, data gets stored in Data Lake Bronze and Silver zone.
+- Using **Synapse**, Data Factory does some transformations, and the final data gets stored into Synapse Datawarehouse.
 - Data stored into Synapse Datawarehouse will be available for Power BI visualization.
 
 # Getting Started
 ## Prerequisites 
-In order to successfully deploy this solution, you will need to have access to and/or provision the following resources:
+In order to successfully deploy this solution, you will need to have access to the following resources:
 - [Azure Subscription](https://portal.azure.com/) with owner access - Required to deploy azure resources
 - [Azure CLI installed](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli)- Required for deployment scripts to be run locally (optional)
+- Deployment Parameters (Follow steps mentioned in the next **Deployment Parameters** section)
 
 ## AZURE RESOURCES DEPLOYMENT
-The resources in this folder can be used to deploy the required cloud services into your Azure Subscription. This can be done either via the [Azure Portal](https://portal.azure.com) or by using the [PowerShell script](https://github.com/NealAnalyticsLLC/Enterprise-Data-Warehouse-AzureSynapse/blob/dev/piyush/deployment/ARM%20templates/bicep/resourcedeployment.ps1) included in the deployment folder.
-
-After deployment, you will have an Azure Data Lake Storage Gen 2 Registry, Azure Data Factory, Azure Key Vault, Azure SQL Server, and Azure SQL Dedicated Pool along with Log Analytics.
-
-Resources can also be deployed into your Azure Subscription by using this link.
+The resources in this folder can be used to deploy the required cloud services into your Azure Subscription. This can be done either via the [Azure Portal](https://portal.azure.com) or using the below button: 
 
 [![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FNealAnalyticsLLC%2FEnterprise-Data-Warehouse-AzureSynapse%2Fdev%2Fpiyush%2Fdeployment%2FARM%2520templates%2Fjson%2Fmain.json%3Ftoken%3DGHSAT0AAAAAABYM5LIRHLC3G4TQG4YVDQDYYZCWVTA)
 
-**NOTE (for deploying using PowerShell script):**
+Also, you can use this [PowerShell script](https://github.com/NealAnalyticsLLC/Enterprise-Data-Warehouse-AzureSynapse/blob/dev/piyush/deployment/ARM%20templates/bicep/resourcedeployment.ps1) to deploy the resources locally (**make sure to replace parameters in the main.bicep file**).
 
-You can use this [link](https://azure.microsoft.com/en-in/global-infrastructure/geographies/#geographies) to choose from and decide deployment locations **<deployment-location>** according to your requirements.
+After deployment, you will have an Azure Data Lake Storage Gen 2 Registry, Azure Data Factory, Azure Key Vault, Azure SQL Server, and Azure SQL Dedicated Pool along with Log Analytics.
 
-**Before deploying the code, you’ll have to edit the parameters in the code**
-
-Below are the steps to edit the parameters in the main.bicep file.	
-
-Step 1: 
-Open the main.bicep file from the downloaded package.
-On the top you’ll see several parameters defined as follows:
+## Deployment Parameters
 
 1. **param deploymentLocation string = '<deployment-location>'**
 This parameter is for the location of the deployment to take place, that is in which Azure region you wish to deploy the resources. Replace <deployment-location> with the value of location you want.
@@ -71,20 +63,7 @@ For e.g., **param SqlDatawarehouseAdminUser string = 'sqldwadmin'**
 This parameter is for the password of the dedicated SQL pool server that you want to give. Replace **<sql-dedicatedpool-server-password>** with any username of your choice. Please follow this [link](https://docs.microsoft.com/en-us/sql/relational-databases/security/password-policy?view=sql-server-ver16) to check the password policy.
 
 8. **param SqlServerSID string = '<sql-sever-admin-sid>'**
-This parameter is for the SID of the SQL Server Admin that is required for setting up Azure Active Directory login for SQL Server. Replace **<sql-sever-admin-sid>** with the SID of the person that you want to keep as admin.
-Retrieve the **Active Directory SID** (object ID) of the admin from **Azure Active Directory** (AAD) section on **Azure Portal** as follows	
-    	
-	* Go to the Azure Active Directory section from Azure portal.
-	
-		![Active Directory Section](https://github.com/NealAnalyticsLLC/Enterprise-Data-Warehouse-AzureSynapse/blob/dev/piyush/images/Azure%20Directory%20Section.png)
-	
-	* Go to Users section from side panel
-	
-		![Side panel](https://github.com/NealAnalyticsLLC/Enterprise-Data-Warehouse-AzureSynapse/blob/dev/piyush/images/Side%20Panel.png)
-	* Search for the **User** you want as AAD admin and select it.
-	
-		![Azure Active Directory](https://github.com/NealAnalyticsLLC/Enterprise-Data-Warehouse-AzureSynapse/blob/dev/piyush/images/Azure%20Active%20Directory.png)	 
-	
+It's the Object Id of User/Group and can be obtained from Azure Active Directory -> Users/Groups ->   Replace **<sql-sever-admin-sid>** with the SID of the person that you want to keep as admin.
 	* Copy the **Object ID** from below, also known as the **SID** and paste it in the parameter section.
 	
 		![Overview](https://github.com/NealAnalyticsLLC/Enterprise-Data-Warehouse-AzureSynapse/blob/dev/piyush/images/Overview.png)
@@ -235,7 +214,7 @@ Following are the steps to connect Synapse in power BI –
 # Recommendations
 ## 1. **Performance**
 - **Synapse Dedicated Pool** - Pause the synapse dedicated SQL pool after completion of pipeline execution and resume the pool in the start of pipeline execution. It will help to reduce the azure cost. For example, you can create ADF pipeline using code snippet included in below document.  
-[Code for Pipeline to pause or resume Synapse ](https://github.com/NealAnalyticsLLC/Enterprise-Data-Warehouse-AzureSynapse/blob/dev/piyush/Code%20for%20Pipeline%20to%20pause%20or%20resume%20Synapse#L3)
+[Code for Pipeline to pause or resume Synapse](https://github.com/NealAnalyticsLLC/Enterprise-Data-Warehouse-AzureSynapse/blob/dev/piyush/Code%20for%20Pipeline%20to%20pause%20or%20resume%20Synapse#L3)
 
 - **Pipeline Categorization** - Categorize pipelines based on their trigger time and on the type of data source. It is better to reduce dependencies between the master pipeline and child pipelines. 
 
@@ -265,7 +244,7 @@ Following are the steps to connect Synapse in power BI –
 - **Key Vaults** – Use Azure Key vaults for storing credentials or secrets.
 	
 ## 4. Cost Management
-- **Budget alerts** - Use budget alerts. Budget alerts notify you when spending, based on usage or cost, reaches or exceeds the amount defined in the alert condition of the budget. Cost Management budgets are created using the Azure portal or the Azure Consumption API.
+- **Budget alerts** - Use budget alerts. Budget alerts notify you when spending, based on usage or cost, reaches, or exceeds the amount defined in the alert condition of the budget. Cost Management budgets are created using the Azure portal or the Azure Consumption API.
 
 
 
