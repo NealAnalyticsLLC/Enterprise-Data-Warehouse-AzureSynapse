@@ -79,7 +79,7 @@ The following secrets would be created in key vault with deployment.
 - SynMasterDBConnection - Required to connect Master database of Synapse
 - ADLSKey - Required to store ADLS keys 
 
-#### 2.	ADF Linked Services (ARM Template):
+#### 2.	ADF Linked Services:
 Linked services to the following resources will be created through ARM template
 - Key vault
 - Data lake
@@ -94,7 +94,7 @@ Following Private endpoints will be created for the following resources
 - Private endpoint for Data Lake
 - Private endpoint for the key vault
 
-#### 4.	ADF Permission (ARM template):
+#### 4.	ADF Permission:
 - SQL DB Contributor access to SQL DB
 - Blob data contributor to the Data Lake
 
