@@ -113,20 +113,20 @@ You need to run the SQL script shared with code in Azure SQL DB to create below 
 **ER Diagram –**
 ![MetaData Tables](https://github.com/NealAnalyticsLLC/Enterprise-Data-Warehouse-AzureSynapse/blob/dev/piyush/images/MetaData%20Tables.png)
  
-1. **SourceToStaging** – Purpose of this table is to store source related details and data lake storage details which will be useful in data pipeline to copy data from source to ADLS. 
+1. **SourceToStaging** – Purpose of this table is to store source related details and data lake storage details which will be useful in data pipeline to copy data from source to ADLS.  
 Example: 
 ```
 INSERT INTO [dbo].[SourceToStaging]  ([ServerName], [DatabaseName], [SchemaName], [TableName], [Query], [ConnectionSecret], [DataLakeContainer], [DataLakeDirectory], [DataLakeFileName])
  VALUES ('DESKTOPServer', 'Adventure Works', 'SalesLT', 'Address', 'Select * from SalesLT.Address','ADLSConnection', 'Staging', 'AdventureWorks','Address.parquet')
 ```
-2. **StagingToCleansed** – The Purpose of this table is to store the details about the tables from staging stage to cleansed stage.
+2. **StagingToCleansed** – The Purpose of this table is to store the details about the tables from staging stage to cleansed stage.  
 Example:
 ```
 INSERT INTO [dbo].[StagingToCleansed]([ConnectionSecret], [SourceDataLakeContainer], [SourceDataLakeDirectory], [SourceDataLakeFileName], [DestinationDataLakeContainer], [DestinationDataLakeDirectory], [DestinationDataLakeFileName])
 VALUES ('ADLSConnection', 'Staging', 'AdventureWorks', 'Address.parquet', 'Cleansed', 'AdventureWorks', 'Address.parquet')
 ```
 
-3. **CleansedToSynapse** – This table will store synapse database details like synapse table name, schema, columns, column name for incremental pull etc. Also, it will store ADLS details in the fields for Cleansed data. 
+3. **CleansedToSynapse** – This table will store synapse database details like synapse table name, schema, columns, column name for incremental pull etc. Also, it will store ADLS details in the fields for Cleansed data.  
 Example:
 ```
 INSERT INTO [dbo].[CleansedToSynapse]([PrimaryKey], [Columns], [IncColumnName], [LoadType], [DataLakeContainer], [DataLakeDirectory],  [DataLakeFileName], [DataLakeConnection], [DestinationSchemaName], [DestinationTableName], [DestinationConnection], [DimensionType])
