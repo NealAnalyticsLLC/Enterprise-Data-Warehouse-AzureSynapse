@@ -178,7 +178,6 @@ There are 4 types of pipelines that can be build depending on the requirements.
 1.	Historical Pipelines
 2.	Incremental Pipelines
 3.	Archive pipelines
-4.	Quality Check Pipelines 
 
 # Report Development
 ## How to use Synapse in Power BI
