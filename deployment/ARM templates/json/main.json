@@ -15,7 +15,7 @@
     },
     "projectName": {
       "type": "string",
-      "defaultValue": "enterprisebitest"
+      "defaultValue": ""
     },
     "Environment": {
       "type": "string",
@@ -23,27 +23,27 @@
     },
     "SqlAdminUser": {
       "type": "string",
-      "defaultValue": "sqladmin"
+      "defaultValue": ""
     },
     "SqlAdminPassword": {
       "type": "secureString",
-      "defaultValue": "SASql1234!"
+      "defaultValue": ""
     },
     "SqlDatawarehouseAdminUser": {
       "type": "string",
-      "defaultValue": "sqldwadmin"
+      "defaultValue": ""
     },
     "SqlDatawarehouseAdminPassword": {
       "type": "secureString",
-      "defaultValue": "SASql1234!"
+      "defaultValue": ""
     },
     "SqlServerSID": {
       "type": "string",
-      "defaultValue": "356cbc1d-a189-4950-957b-3460e4714eb6"
+      "defaultValue": ""
     },
     "SqlServerAdminName": {
       "type": "string",
-      "defaultValue": "piyush@nealanalytics.com"
+      "defaultValue": ""
     }
   },
   "variables": {
