@@ -149,6 +149,14 @@ Server=servername;Database=DBName;User Id=username;Password=Pswd;
 		![Adls Networking](https://github.com/NealAnalyticsLLC/Enterprise-Data-Warehouse-AzureSynapse/blob/dev/piyush/images/Adls%20Networking.png)
 	- **Step 3:** Do the same for rest of the resources, Azure SQL DB Server, Azure Key Vault and Azure Dedication SQL Pool Server
 
+#### 4. Enable Interactive authoring:  
+- In data factory go to manage section -> click on the  integration runtime and click on AutoResolveIntegrationRuntime under virtual network  enable the Interactive authoring if not.
+
+#### 5. Azure Key Vault Access policies:
+- In data landing repository Go to the Azure key vault->Access policies-> Create -> select Get and List under Secret permissions -> under principle select the data factory created -> Review and Create
+	
+#### 6. SQL Server Access:
+- Go to the SQL server-> networking -> select allow azure services and resources to access this server.
 
 # Data Pipelines 
 ## How to build a pipeline
