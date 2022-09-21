@@ -104,7 +104,54 @@ resource vaults_kvadfmetadatadev_name_resource 'Microsoft.KeyVault/vaults@2021-1
             ]
     }
     accessPolicies: [
-      
+      {
+
+        objectId: servers_admin_sid
+        permissions: {
+          certificates: [
+            'Get'
+            'List'
+            'Update'
+            'Create'
+            'Import'
+            'Delete'
+            'Recover'
+            'Backup'
+            'Restore'
+            'ManageContacts'
+            'ManageIssuers'
+            'GetIssuers'
+            'ListIssuers'
+            'SetIssuers'
+            'DeleteIssuers'
+        ]
+        keys: [
+            'Get'
+            'List'
+            'Update'
+            'Create'
+            'Import'
+            'Delete'
+            'Recover'
+            'Backup'
+            'Restore'
+            'GetRotationPolicy'
+            'SetRotationPolicy'
+            'Rotate'
+        ]
+        secrets: [
+            'Get'
+            'List'
+            'Set'
+            'Delete'
+            'Recover'
+            'Backup'
+            'Restore'
+        ]
+        }
+        tenantId: tenantId
+
+      }
     ]
     enabledForDeployment: false
     enabledForDiskEncryption: false
