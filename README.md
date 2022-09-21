@@ -21,7 +21,7 @@ In order to successfully deploy this solution, you will need to have access to t
 ## Azure Resource Deployment
 The resources in this folder can be used to deploy the required cloud services into your Azure Subscription. This can be done either via the [Azure Portal](https://portal.azure.com) or using the below button: 
 
-[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FNealAnalyticsLLC%2FEnterprise-Data-Warehouse-AzureSynapse%2Fdev%2Fpiyush%2Fdeployment%2FARM%2520templates%2Fjson%2Fmain.json%3Ftoken%3DGHSAT0AAAAAABYM5LIQ7ZVVNSCMVEJ3CBHMYZDEX5Q)
+[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https://raw.githubusercontent.com/NealAnalyticsLLC/Enterprise-Data-Warehouse-AzureSynapse/dev/piyush/deployment/ARM%20templates/json/main.json?token=GHSAT0AAAAAABZAWE3VCTHNLF42G67L2QVMYZKZ2QA)
 
 Also, you can use this [PowerShell script](https://github.com/NealAnalyticsLLC/Enterprise-Data-Warehouse-AzureSynapse/blob/dev/piyush/deployment/ARM%20templates/bicep/resourcedeployment.ps1) to deploy the resources locally (**make sure to replace parameters in the main.bicep file**).
 
