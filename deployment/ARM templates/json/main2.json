@@ -5,18 +5,10 @@
     "_generator": {
       "name": "bicep",
       "version": "0.10.61.36676",
-      "templateHash": "9912219963940670583"
+      "templateHash": "15578765609876819056"
     }
   },
   "parameters": {
-    "subscriptionId": {
-      "type": "string",
-      "defaultValue": "[subscription().subscriptionId]"
-    },
-    "tenantId": {
-      "type": "string",
-      "defaultValue": "[subscription().tenantId]"
-    },
     "deployment_location": {
       "type": "string",
       "defaultValue": "eastus"
@@ -27,7 +19,7 @@
     },
     "env": {
       "type": "string",
-      "defaultValue": "dev"
+      "defaultValue": ""
     },
     "sql_admin_user": {
       "type": "string",
@@ -35,7 +27,7 @@
     },
     "sql_admin_password": {
       "type": "string",
-      "defaultValue": "!"
+      "defaultValue": ""
     },
     "sqldw_admin_user": {
       "type": "string",
@@ -55,7 +47,9 @@
     }
   },
   "variables": {
-    "resourceprefix": "[take(uniqueString(deployment().name), 5)]"
+    "resourceprefix": "[take(uniqueString(deployment().name), 5)]",
+    "subscriptionId": "[subscription().subscriptionId]",
+    "tenantId": "[subscription().tenantId]"
   },
   "resources": [
     {
@@ -112,7 +106,7 @@
             "value": "[parameters('env')]"
           },
           "subscriptionId": {
-            "value": "[parameters('subscriptionId')]"
+            "value": "[variables('subscriptionId')]"
           },
           "location": {
             "value": "[parameters('deployment_location')]"
@@ -470,7 +464,7 @@
             "value": "[parameters('servers_admin_name')]"
           },
           "tenantId": {
-            "value": "[parameters('tenantId')]"
+            "value": "[variables('tenantId')]"
           },
           "project_name": {
             "value": "[parameters('project_name')]"
@@ -497,7 +491,7 @@
             "value": "[reference(extensionResourceId(format('/subscriptions/{0}/resourceGroups/{1}', subscription().subscriptionId, format('rg-{0}-datalanding-dev-001', parameters('project_name'))), 'Microsoft.Resources/deployments', format('synapse-{0}', variables('resourceprefix')))).outputs.sqldw_server_name.value]"
           },
           "subscriptionId": {
-            "value": "[parameters('subscriptionId')]"
+            "value": "[variables('subscriptionId')]"
           },
           "location": {
             "value": "[parameters('deployment_location')]"
@@ -516,7 +510,7 @@
             "_generator": {
               "name": "bicep",
               "version": "0.10.61.36676",
-              "templateHash": "16509203792529656369"
+              "templateHash": "6275785718361295705"
             }
           },
           "parameters": {
@@ -677,54 +671,7 @@
                   "ipRules": [],
                   "virtualNetworkRules": []
                 },
-                "accessPolicies": [
-                  {
-                    "objectId": "[parameters('servers_admin_sid')]",
-                    "permissions": {
-                      "certificates": [
-                        "Get",
-                        "List",
-                        "Update",
-                        "Create",
-                        "Import",
-                        "Delete",
-                        "Recover",
-                        "Backup",
-                        "Restore",
-                        "ManageContacts",
-                        "ManageIssuers",
-                        "GetIssuers",
-                        "ListIssuers",
-                        "SetIssuers",
-                        "DeleteIssuers"
-                      ],
-                      "keys": [
-                        "Get",
-                        "List",
-                        "Update",
-                        "Create",
-                        "Import",
-                        "Delete",
-                        "Recover",
-                        "Backup",
-                        "Restore",
-                        "GetRotationPolicy",
-                        "SetRotationPolicy",
-                        "Rotate"
-                      ],
-                      "secrets": [
-                        "Get",
-                        "List",
-                        "Set",
-                        "Delete",
-                        "Recover",
-                        "Backup",
-                        "Restore"
-                      ]
-                    },
-                    "tenantId": "[parameters('tenantId')]"
-                  }
-                ],
+                "accessPolicies": [],
                 "enabledForDeployment": false,
                 "enabledForDiskEncryption": false,
                 "enabledForTemplateDeployment": true,
@@ -872,7 +819,7 @@
             "value": "[parameters('servers_admin_sid')]"
           },
           "tenantId": {
-            "value": "[parameters('tenantId')]"
+            "value": "[variables('tenantId')]"
           },
           "log_analytics_workspace_id": {
             "value": "[reference(extensionResourceId(format('/subscriptions/{0}/resourceGroups/{1}', subscription().subscriptionId, format('rg-{0}-management-dev-001', parameters('project_name'))), 'Microsoft.Resources/deployments', format('monitoring-{0}', variables('resourceprefix')))).outputs.log_analytics_workspace_id.value]"
@@ -1477,7 +1424,7 @@
         "mode": "Incremental",
         "parameters": {
           "subscriptionId": {
-            "value": "[parameters('subscriptionId')]"
+            "value": "[variables('subscriptionId')]"
           },
           "adf_name": {
             "value": "[reference(extensionResourceId(format('/subscriptions/{0}/resourceGroups/{1}', subscription().subscriptionId, format('rg-{0}-datalanding-dev-001', parameters('project_name'))), 'Microsoft.Resources/deployments', format('adf-{0}', variables('resourceprefix')))).outputs.adf_name.value]"
