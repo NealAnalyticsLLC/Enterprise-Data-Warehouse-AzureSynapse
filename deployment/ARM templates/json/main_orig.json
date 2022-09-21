@@ -5,45 +5,45 @@
     "_generator": {
       "name": "bicep",
       "version": "0.4.1318.3566",
-      "templateHash": "5227743309501062592"
+      "templateHash": "16705934372327458421"
     }
   },
   "parameters": {
     "deploymentLocation": {
       "type": "string",
-      "defaultValue": ""
+      "defaultValue": "eastus"
     },
     "projectName": {
       "type": "string",
-      "defaultValue": ""
+      "defaultValue": "enterprisebitest"
     },
     "Environment": {
       "type": "string",
-      "defaultValue": ""
+      "defaultValue": "dev"
     },
     "SqlAdminUser": {
       "type": "string",
-      "defaultValue": ""
+      "defaultValue": "sqladmin"
     },
     "SqlAdminPassword": {
       "type": "secureString",
-      "defaultValue": ""
+      "defaultValue": "SASql1234!"
     },
     "SqlDatawarehouseAdminUser": {
       "type": "string",
-      "defaultValue": ""
+      "defaultValue": "sqldwadmin"
     },
     "SqlDatawarehouseAdminPassword": {
       "type": "secureString",
-      "defaultValue": ""
+      "defaultValue": "SASql1234!"
     },
     "SqlServerSID": {
       "type": "string",
-      "defaultValue": ""
+      "defaultValue": "356cbc1d-a189-4950-957b-3460e4714eb6"
     },
     "SqlServerAdminName": {
       "type": "string",
-      "defaultValue": ""
+      "defaultValue": "piyush@nealanalytics.com"
     }
   },
   "variables": {
@@ -514,7 +514,7 @@
             "_generator": {
               "name": "bicep",
               "version": "0.4.1318.3566",
-              "templateHash": "12257171679937855845"
+              "templateHash": "5364596751197910623"
             }
           },
           "parameters": {
@@ -672,54 +672,7 @@
                   "ipRules": [],
                   "virtualNetworkRules": []
                 },
-                "accessPolicies": [
-                  {
-                    "objectId": "[parameters('servers_admin_sid')]",
-                    "permissions": {
-                      "certificates": [
-                        "Get",
-                        "List",
-                        "Update",
-                        "Create",
-                        "Import",
-                        "Delete",
-                        "Recover",
-                        "Backup",
-                        "Restore",
-                        "ManageContacts",
-                        "ManageIssuers",
-                        "GetIssuers",
-                        "ListIssuers",
-                        "SetIssuers",
-                        "DeleteIssuers"
-                      ],
-                      "keys": [
-                        "Get",
-                        "List",
-                        "Update",
-                        "Create",
-                        "Import",
-                        "Delete",
-                        "Recover",
-                        "Backup",
-                        "Restore",
-                        "GetRotationPolicy",
-                        "SetRotationPolicy",
-                        "Rotate"
-                      ],
-                      "secrets": [
-                        "Get",
-                        "List",
-                        "Set",
-                        "Delete",
-                        "Recover",
-                        "Backup",
-                        "Restore"
-                      ]
-                    },
-                    "tenantId": "[parameters('tenantId')]"
-                  }
-                ],
+                "accessPolicies": [],
                 "enabledForDeployment": false,
                 "enabledForDiskEncryption": false,
                 "enabledForTemplateDeployment": true,
