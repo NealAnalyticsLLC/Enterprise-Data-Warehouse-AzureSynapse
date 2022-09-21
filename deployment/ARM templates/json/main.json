@@ -4,8 +4,8 @@
   "metadata": {
     "_generator": {
       "name": "bicep",
-      "version": "0.4.1318.3566",
-      "templateHash": "5227743309501062592"
+      "version": "0.10.61.36676",
+      "templateHash": "1377953078006225853"
     }
   },
   "parameters": {
@@ -136,8 +136,8 @@
           "metadata": {
             "_generator": {
               "name": "bicep",
-              "version": "0.4.1318.3566",
-              "templateHash": "14661706180739427763"
+              "version": "0.10.61.36676",
+              "templateHash": "10440006884614538984"
             }
           },
           "parameters": {
@@ -268,7 +268,6 @@
                 "privateLinkResourceId": "[format('/subscriptions/{0}/resourceGroups/{1}/providers/Microsoft.Storage/storageAccounts/{2}', parameters('subscriptionId'), resourceGroup().name, parameters('storageAccounts_datalake_name'))]"
               },
               "dependsOn": [
-                "[resourceId('Microsoft.DataFactory/factories', parameters('dataFactories_adf_name'))]",
                 "[resourceId('Microsoft.DataFactory/factories/managedVirtualNetworks', parameters('dataFactories_adf_name'), 'default')]"
               ]
             },
@@ -281,7 +280,6 @@
                 "privateLinkResourceId": "[format('/subscriptions/{0}/resourceGroups/{1}/providers/Microsoft.Sql/servers/{2}', parameters('subscriptionId'), resourceGroup().name, parameters('servers_metadata_name'))]"
               },
               "dependsOn": [
-                "[resourceId('Microsoft.DataFactory/factories', parameters('dataFactories_adf_name'))]",
                 "[resourceId('Microsoft.DataFactory/factories/managedVirtualNetworks', parameters('dataFactories_adf_name'), 'default')]"
               ]
             },
@@ -294,7 +292,6 @@
                 "privateLinkResourceId": "[format('/subscriptions/{0}/resourceGroups/{1}/providers/Microsoft.KeyVault/vaults/{2}', parameters('subscriptionId'), resourceGroup().name, parameters('vaults_BIKeyVault_name'))]"
               },
               "dependsOn": [
-                "[resourceId('Microsoft.DataFactory/factories', parameters('dataFactories_adf_name'))]",
                 "[resourceId('Microsoft.DataFactory/factories/managedVirtualNetworks', parameters('dataFactories_adf_name'), 'default')]"
               ]
             },
@@ -307,7 +304,6 @@
                 "privateLinkResourceId": "[format('/subscriptions/{0}/resourceGroups/{1}/providers/Microsoft.Sql/servers/{2}', parameters('subscriptionId'), resourceGroup().name, parameters('servers_datawarehouse_name'))]"
               },
               "dependsOn": [
-                "[resourceId('Microsoft.DataFactory/factories', parameters('dataFactories_adf_name'))]",
                 "[resourceId('Microsoft.DataFactory/factories/managedVirtualNetworks', parameters('dataFactories_adf_name'), 'default')]"
               ]
             },
@@ -513,8 +509,8 @@
           "metadata": {
             "_generator": {
               "name": "bicep",
-              "version": "0.4.1318.3566",
-              "templateHash": "12257171679937855845"
+              "version": "0.10.61.36676",
+              "templateHash": "16509203792529656369"
             }
           },
           "parameters": {
@@ -535,7 +531,11 @@
             },
             "vaults_BIKeyVault_name": {
               "type": "string",
-              "defaultValue": "[format('kv{0}{1}001', parameters('project_name'), parameters('env'))]"
+              "defaultValue": "[format('kv{0}{1}777', parameters('project_name'), parameters('env'))]"
+            },
+            "storageAccounts_datalake_name": {
+              "type": "string",
+              "defaultValue": "[format('dls{0}{1}', parameters('project_name'), parameters('env'))]"
             },
             "log_analytics_workspace_id": {
               "type": "string"
@@ -625,10 +625,9 @@
               "location": "[parameters('location')]",
               "tags": {},
               "sku": {
-                "name": "GP_S_Gen5",
-                "tier": "GeneralPurpose",
-                "capacity": 4,
-                "family": "Gen5"
+                "name": "Standard",
+                "tier": "Standard",
+                "capacity": 20
               },
               "kind": "v12.0,user",
               "properties": {
@@ -852,7 +851,7 @@
             "value": "[parameters('Environment')]"
           },
           "sqldw_admin_user": {
-            "value": "[parameters('SqlAdminUser')]"
+            "value": "[parameters('SqlDatawarehouseAdminUser')]"
           },
           "sqldw_admin_password": {
             "value": "[parameters('SqlDatawarehouseAdminPassword')]"
@@ -879,8 +878,8 @@
           "metadata": {
             "_generator": {
               "name": "bicep",
-              "version": "0.4.1318.3566",
-              "templateHash": "11882502647677053235"
+              "version": "0.10.61.36676",
+              "templateHash": "13671002299713494782"
             }
           },
           "parameters": {
@@ -1030,8 +1029,8 @@
           "metadata": {
             "_generator": {
               "name": "bicep",
-              "version": "0.4.1318.3566",
-              "templateHash": "2186142192102476839"
+              "version": "0.10.61.36676",
+              "templateHash": "11675524351404745576"
             }
           },
           "parameters": {
@@ -1112,8 +1111,8 @@
           "metadata": {
             "_generator": {
               "name": "bicep",
-              "version": "0.4.1318.3566",
-              "templateHash": "2169654471188017348"
+              "version": "0.10.61.36676",
+              "templateHash": "8711123624318814853"
             }
           },
           "parameters": {
@@ -1147,8 +1146,7 @@
                 "publicAccess": "None"
               },
               "dependsOn": [
-                "[resourceId('Microsoft.Storage/storageAccounts/blobServices', parameters('storageAccounts_datalake_name'), 'default')]",
-                "[resourceId('Microsoft.Storage/storageAccounts', parameters('storageAccounts_datalake_name'))]"
+                "[resourceId('Microsoft.Storage/storageAccounts/blobServices', parameters('storageAccounts_datalake_name'), 'default')]"
               ]
             },
             {
@@ -1159,8 +1157,7 @@
                 "publicAccess": "None"
               },
               "dependsOn": [
-                "[resourceId('Microsoft.Storage/storageAccounts/blobServices', parameters('storageAccounts_datalake_name'), 'default')]",
-                "[resourceId('Microsoft.Storage/storageAccounts', parameters('storageAccounts_datalake_name'))]"
+                "[resourceId('Microsoft.Storage/storageAccounts/blobServices', parameters('storageAccounts_datalake_name'), 'default')]"
               ]
             },
             {
@@ -1341,8 +1338,8 @@
           "metadata": {
             "_generator": {
               "name": "bicep",
-              "version": "0.4.1318.3566",
-              "templateHash": "343154927286186685"
+              "version": "0.10.61.36676",
+              "templateHash": "13167366387123086547"
             }
           },
           "parameters": {
@@ -1372,7 +1369,7 @@
             },
             "vaults_BIKeyVault_name": {
               "type": "string",
-              "defaultValue": "[format('kvpurview{0}{1}', parameters('project_name'), parameters('env'))]"
+              "defaultValue": "[format('kvpurview{0}104', parameters('env'))]"
             },
             "tenantId": {
               "type": "string",
@@ -1492,8 +1489,8 @@
           "metadata": {
             "_generator": {
               "name": "bicep",
-              "version": "0.4.1318.3566",
-              "templateHash": "2332227198946609829"
+              "version": "0.10.61.36676",
+              "templateHash": "8873013203128375189"
             }
           },
           "parameters": {

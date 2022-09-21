@@ -1,24 +1,26 @@
 targetScope = 'subscription'
 
-param subscriptionId string = subscription().subscriptionId
-param tenantId string = subscription().tenantId
-param deployment_location string = 'eastus'
-param project_name string = 'ndpftest'
-param env string ='dev'
-param sql_admin_user string = 'sqladmin'
-param sql_admin_password string = 'SASql1234!'
-param sqldw_admin_user string = 'sqldwadmin'
-param sqldw_admin_password string = 'SASql1234!'
-param servers_admin_sid string = '356cbc1d-a189-4950-957b-3460e4714eb6'
-param servers_admin_name string = 'piyush@nealanalytics.com'
+var subscriptionId = subscription().subscriptionId
+var tenantId = subscription().tenantId
+param deploymentLocation string = ''
+param projectName string = ''
+param Environment string =''
+param SqlAdminUser string = ''
+@secure()
+param SqlAdminPassword string = ''
+param SqlDatawarehouseAdminUser string = ''
+@secure()
+param SqlDatawarehouseAdminPassword string = ''
+param SqlServerSID string = ''
+param SqlServerAdminName string = ''
 @description('adding prefix to every resource names')
 var resourceprefix = take(uniqueString(deployment().name),5)
 
 
 
 resource rgIngest 'Microsoft.Resources/resourceGroups@2020-10-01' = {
-  name: 'rg-${project_name}-datalanding-dev-001'
-  location: deployment_location
+  name: 'rg-${projectName}-datalanding-dev-001'
+  location: deploymentLocation
   tags:{
     'Environment':'Dev'
     'ProjectName':'NDPF'
@@ -28,8 +30,8 @@ resource rgIngest 'Microsoft.Resources/resourceGroups@2020-10-01' = {
 }
 
 resource rgGovernance 'Microsoft.Resources/resourceGroups@2020-10-01' = {
-  name: 'rg-${project_name}-datagovernance-dev-001'
-  location: deployment_location
+  name: 'rg-${projectName}-datagovernance-dev-001'
+  location: deploymentLocation
   tags:{
     'Environment':'Dev'
     'ProjectName':'NDPF'
@@ -39,8 +41,8 @@ resource rgGovernance 'Microsoft.Resources/resourceGroups@2020-10-01' = {
 }
 
 resource rgManagement 'Microsoft.Resources/resourceGroups@2020-10-01' = {
-  name: 'rg-${project_name}-management-dev-001'
-  location: deployment_location
+  name: 'rg-${projectName}-management-dev-001'
+  location: deploymentLocation
   tags:{
     'Environment':'Dev'
     'ProjectName':'NDPF'
@@ -53,10 +55,10 @@ module AzDataFactoryDeploy 'data-landing-zone/ingest-template.bicep' = {
   name: 'adf-${resourceprefix}'
   scope: rgIngest
   params:{
-    project_name : project_name
-    env : env
+    project_name : projectName
+    env : Environment
     subscriptionId : subscriptionId
-    location:deployment_location
+    location:deploymentLocation
     log_analytics_workspace_id:AzMonitoringDeploy.outputs.log_analytics_workspace_id
     sqldb_metadata_name:AzDataFactoryMetadataDeploy.outputs.sql_db_name
     servers_metadata_name:AzDataFactoryMetadataDeploy.outputs.sql_server_name
@@ -77,19 +79,19 @@ module AzDataFactoryMetadataDeploy 'data-landing-zone/metadata-template.bicep' =
   name: 'metadata-${resourceprefix}'
   scope: rgIngest
   params:{
-    servers_admin_sid:servers_admin_sid
-    servers_admin_name: servers_admin_name
+    servers_admin_sid:SqlServerSID
+    servers_admin_name: SqlServerAdminName
     tenantId : tenantId
-    project_name : project_name
-    env : env
-    sql_admin_user:sql_admin_user
-    sql_admin_password:sql_admin_password
-    sqldw_admin_user:sqldw_admin_user
-    sqldw_admin_password:sqldw_admin_password
+    project_name : projectName
+    env : Environment
+    sql_admin_user:SqlAdminUser
+    sql_admin_password:SqlAdminPassword
+    sqldw_admin_user:SqlDatawarehouseAdminUser
+    sqldw_admin_password:SqlDatawarehouseAdminPassword
     sqldw_server_name:AzSynapseDeploy.outputs.sqldw_server_name
     sqldw_name:AzSynapseDeploy.outputs.sqldw_server_name
     subscriptionId : subscriptionId
-    location:deployment_location
+    location:deploymentLocation
     log_analytics_workspace_id:AzMonitoringDeploy.outputs.log_analytics_workspace_id
     adls_resource_id:AzDatalakeDeploy.outputs.adls_resource_id
     
@@ -105,16 +107,14 @@ module AzSynapseDeploy 'data-landing-zone/synapse-template.bicep' = {
   name: 'synapse-${resourceprefix}'
   scope:rgIngest
   params:{
-    project_name : project_name
-    env : env
-    sqldw_admin_user:sqldw_admin_user
-    sqldw_admin_password:sqldw_admin_password
-    location:deployment_location
-    servers_admin_name:servers_admin_name
-    servers_admin_sid:servers_admin_sid
+    project_name : projectName
+    env : Environment
+    sqldw_admin_user:SqlDatawarehouseAdminUser
+    sqldw_admin_password:SqlDatawarehouseAdminPassword
+    location:deploymentLocation
+    servers_admin_name:SqlServerAdminName
+    servers_admin_sid:SqlServerSID
     tenantId:tenantId
-    //adls_resource_id:AzDatalakeDeploy.outputs.adls_resource_id
-    //adls_name:AzDatalakeDeploy.outputs.adls_name
     log_analytics_workspace_id:AzMonitoringDeploy.outputs.log_analytics_workspace_id
   }
   dependsOn:[
@@ -128,8 +128,8 @@ module AzMonitoringDeploy 'data-landing-zone/monitoring-template.bicep' = {
   name: 'monitoring-${resourceprefix}'
   scope:rgManagement
   params:{
-    project_name : project_name
-    location:deployment_location
+    project_name : projectName
+    location:deploymentLocation
   }
   
 }
@@ -138,9 +138,9 @@ module AzDatalakeDeploy 'data-landing-zone/datalake-template.bicep' = {
   name: 'storage-${resourceprefix}'
   scope:rgIngest
   params:{
-    project_name : project_name
-    location:deployment_location
-    env: env
+    project_name : projectName
+    location:deploymentLocation
+    env: Environment
     log_analytics_workspace_id:AzMonitoringDeploy.outputs.log_analytics_workspace_id
     
   }
@@ -152,9 +152,9 @@ module AzPurviewDeploy 'data-management-zone/governance-template.bicep' = {
   scope: rgGovernance
   params:{
         
-        project_name : project_name
-        location:deployment_location
-        env : env
+        project_name : projectName
+        location:deploymentLocation
+        env : Environment
         log_analytics_workspace_id:AzMonitoringDeploy.outputs.log_analytics_workspace_id
       
     }
