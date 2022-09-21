@@ -107,7 +107,7 @@ module AzSynapseDeploy 'data-landing-zone/synapse-template.bicep' = {
   params:{
     project_name : project_name
     env : env
-    sqldw_admin_user:sql_admin_user
+    sqldw_admin_user:sqldw_admin_user
     sqldw_admin_password:sqldw_admin_password
     location:deployment_location
     servers_admin_name:servers_admin_name
