@@ -5,7 +5,7 @@
     "_generator": {
       "name": "bicep",
       "version": "0.10.61.36676",
-      "templateHash": "1377953078006225853"
+      "templateHash": "7117457430268094231"
     }
   },
   "parameters": {
@@ -1339,7 +1339,7 @@
             "_generator": {
               "name": "bicep",
               "version": "0.10.61.36676",
-              "templateHash": "13167366387123086547"
+              "templateHash": "7783521942905048492"
             }
           },
           "parameters": {
@@ -1369,7 +1369,7 @@
             },
             "vaults_BIKeyVault_name": {
               "type": "string",
-              "defaultValue": "[format('kvpurview{0}104', parameters('env'))]"
+              "defaultValue": "[format('kvpurview{0}{1}104', parameters('project_name'), parameters('env'))]"
             },
             "tenantId": {
               "type": "string",
