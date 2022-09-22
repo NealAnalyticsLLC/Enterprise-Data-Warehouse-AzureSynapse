@@ -63,7 +63,7 @@ resource diagnostic_log_dev_resource_name 'Microsoft.Insights/diagnosticSettings
   scope:servers_datwarehouse_db_name
 }
 
-output sqldw_name string = servers_datawarehouse_name_resource.name
+output sqldw_name string = servers_datwarehouse_db_name.name
 output sqldw_resource_id string = servers_datawarehouse_name_resource.id
 output sqldw_server_name string = sqldw_server_name
 
