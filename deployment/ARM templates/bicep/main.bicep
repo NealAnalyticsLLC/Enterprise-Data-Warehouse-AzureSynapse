@@ -89,7 +89,7 @@ module AzDataFactoryMetadataDeploy 'data-landing-zone/metadata-template.bicep' =
     sqldw_admin_user:SqlDatawarehouseAdminUser
     sqldw_admin_password:SqlDatawarehouseAdminPassword
     sqldw_server_name:AzSynapseDeploy.outputs.sqldw_server_name
-    sqldw_name:AzSynapseDeploy.outputs.sqldw_server_name
+    sqldw_name:AzSynapseDeploy.outputs.sqldw_name
     subscriptionId : subscriptionId
     location:deploymentLocation
     log_analytics_workspace_id:AzMonitoringDeploy.outputs.log_analytics_workspace_id
