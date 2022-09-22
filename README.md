@@ -21,7 +21,7 @@ In order to successfully deploy this solution, you will need to have access to t
 ## Azure Resource Deployment
 The resources in this folder can be used to deploy the required cloud services into your Azure Subscription. This can be done either via the [Azure Portal](https://portal.azure.com) or using the below button: 
 
-[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FNealAnalyticsLLC%2FEnterprise-Data-Warehouse-AzureSynapse%2Fdev%2Fpiyush%2Fdeployment%2FARM%2520templates%2Fjson%2Fmain.json%3Ftoken%3DGHSAT0AAAAAABZAWE3V4XJQ4B4IJK2TSOGMYZL7OYQ)
+[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FNealAnalyticsLLC%2FEnterprise-Data-Warehouse-AzureSynapse%2Fdev%2Fpiyush%2Fdeployment%2FARM%2520templates%2Fjson%2Fmain.json%3Ftoken%3DGHSAT0AAAAAABZAWE3V452LCOF6SK7DHTCOYZMAYVQ)
 
 Also, you can use this [PowerShell script](https://github.com/NealAnalyticsLLC/Enterprise-Data-Warehouse-AzureSynapse/blob/dev/piyush/deployment/ARM%20templates/bicep/resourcedeployment.ps1) to deploy the resources locally (**make sure to replace parameters in the main.bicep file**).
 
@@ -149,14 +149,14 @@ Server=servername;Database=DBName;User Id=username;Password=Pswd;
 		![Adls Networking](https://github.com/NealAnalyticsLLC/Enterprise-Data-Warehouse-AzureSynapse/blob/dev/piyush/images/Adls%20Networking.png)
 	- **Step 3:** Do the same for rest of the resources, Azure SQL DB Server, Azure Key Vault and Azure Dedication SQL Pool Server
 
-#### 4. Enable Interactive authoring:  
-- In data factory go to manage section -> click on the  integration runtime and click on AutoResolveIntegrationRuntime under virtual network  enable the Interactive authoring if not.
-
-#### 5. Azure Key Vault Access policies:
+#### 4. Azure Key Vault Access policies:
 - In data landing repository Go to the Azure key vault->Access policies-> Create -> select Get and List under Secret permissions -> under principle select the data factory created -> Review and Create
 	
-#### 6. SQL Server Access:
+#### 5. SQL Server Access:
 - Go to the SQL server-> networking -> select allow azure services and resources to access this server.
+
+#### 6. Enable Interactive authoring:  
+- In data factory go to manage section -> click on the  integration runtime and click on AutoResolveIntegrationRuntime under virtual network  enable the Interactive authoring if not.
 
 # Data Pipelines 
 ## How to build a pipeline
