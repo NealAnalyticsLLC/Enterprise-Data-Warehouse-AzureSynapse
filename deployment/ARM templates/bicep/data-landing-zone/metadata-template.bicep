@@ -105,6 +105,7 @@ resource vaults_kvadfmetadatadev_name_resource 'Microsoft.KeyVault/vaults@2021-1
     }
     accessPolicies: [
       {
+
         objectId: servers_admin_sid
         permissions: {
           certificates: [
@@ -150,8 +151,9 @@ resource vaults_kvadfmetadatadev_name_resource 'Microsoft.KeyVault/vaults@2021-1
         ]
         }
         tenantId: tenantId
+
       }
-      
+
     ]
     enabledForDeployment: false
     enabledForDiskEncryption: false
