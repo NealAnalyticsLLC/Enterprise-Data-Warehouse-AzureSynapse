@@ -1,0 +1,171 @@
+{
+    "name": "PL_Pause_Or_Resume_SQLPool",
+    "properties": {
+        "description": "Resume or Pause Azure Synapse Analytics SQL Pool",
+        "activities": [
+            {
+                "name": "check_azure_synapse_sql_pool_status",
+                "type": "WebActivity",
+                "dependsOn": [],
+                "policy": {
+                    "timeout": "7.00:00:00",
+                    "retry": 0,
+                    "retryIntervalInSeconds": 30,
+                    "secureOutput": false,
+                    "secureInput": false
+                },
+                "userProperties": [],
+                "typeProperties": {
+                    "url": {
+                        "value": "@concat('https://management.azure.com/subscriptions/',pipeline().parameters.SubscriptionId,'/resourceGroups/',pipeline().parameters.ResourceGroupName,'/providers/Microsoft.Sql/servers/',pipeline().parameters.ServerName,'/databases/',pipeline().parameters.DatabaseName,'?api-version=2014-04-01-preview')",
+                        "type": "Expression"
+                    },
+                    "method": "GET",
+                    "authentication": {
+                        "type": "MSI",
+                        "resource": "https://management.azure.com/"
+                    }
+                }
+            },
+            {
+                "name": "if_paused_and_command_is_resume_then_resume",
+                "type": "IfCondition",
+                "dependsOn": [
+                    {
+                        "activity": "check_azure_synapse_sql_pool_status",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "userProperties": [],
+                "typeProperties": {
+                    "expression": {
+                        "value": "@and(equals(activity('check_azure_synapse_sql_pool_status').output.properties.status,'Paused'),equals(pipeline().parameters.Command,'resume'))",
+                        "type": "Expression"
+                    },
+                    "ifTrueActivities": [
+                        {
+                            "name": "resume_sql_pool",
+                            "description": "",
+                            "type": "WebActivity",
+                            "dependsOn": [],
+                            "policy": {
+                                "timeout": "7.00:00:00",
+                                "retry": 3,
+                                "retryIntervalInSeconds": 30,
+                                "secureOutput": false,
+                                "secureInput": false
+                            },
+                            "userProperties": [
+                                {
+                                    "name": "Azure Synapse Analytics",
+                                    "value": "Resume or Pause"
+                                }
+                            ],
+                            "typeProperties": {
+                                "url": {
+                                    "value": "@concat('https://management.azure.com/subscriptions/',pipeline().parameters.SubscriptionId,'/resourceGroups/',pipeline().parameters.ResourceGroupName,'/providers/Microsoft.Sql/servers/',pipeline().parameters.ServerName,'/databases/',pipeline().parameters.DatabaseName,'/resume?api-version=2014-04-01-preview')",
+                                    "type": "Expression"
+                                },
+                                "method": "POST",
+                                "body": {
+                                    "value": "{}",
+                                    "type": "Expression"
+                                },
+                                "authentication": {
+                                    "type": "MSI",
+                                    "resource": "https://management.azure.com/"
+                                }
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                "name": "if_online_and_command_is_pause_then_pause",
+                "type": "IfCondition",
+                "dependsOn": [
+                    {
+                        "activity": "check_azure_synapse_sql_pool_status",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "userProperties": [],
+                "typeProperties": {
+                    "expression": {
+                        "value": "@and(equals(activity('check_azure_synapse_sql_pool_status').output.properties.status,'Online'),equals(pipeline().parameters.Command,'pause'))",
+                        "type": "Expression"
+                    },
+                    "ifTrueActivities": [
+                        {
+                            "name": "pause_sql_pool",
+                            "description": "",
+                            "type": "WebActivity",
+                            "dependsOn": [],
+                            "policy": {
+                                "timeout": "7.00:00:00",
+                                "retry": 3,
+                                "retryIntervalInSeconds": 30,
+                                "secureOutput": false,
+                                "secureInput": false
+                            },
+                            "userProperties": [
+                                {
+                                    "name": "Azure Synapse Analytics",
+                                    "value": "Resume or Pause"
+                                }
+                            ],
+                            "typeProperties": {
+                                "url": {
+                                    "value": "@concat('https://management.azure.com/subscriptions/',pipeline().parameters.SubscriptionId,'/resourceGroups/',pipeline().parameters.ResourceGroupName,'/providers/Microsoft.Sql/servers/',pipeline().parameters.ServerName,'/databases/',pipeline().parameters.DatabaseName,'/pause?api-version=2014-04-01-preview')",
+                                    "type": "Expression"
+                                },
+                                "method": "POST",
+                                "body": {
+                                    "value": "{}",
+                                    "type": "Expression"
+                                },
+                                "authentication": {
+                                    "type": "MSI",
+                                    "resource": "https://management.azure.com/"
+                                }
+                            }
+                        }
+                    ]
+                }
+            }
+        ],
+        "parameters": {
+            "SubscriptionId": {
+                "type": "string",
+                "defaultValue": ""
+            },
+            "ResourceGroupName": {
+                "type": "string",
+                "defaultValue": ""
+            },
+            "Region": {
+                "type": "string",
+                "defaultValue": ""
+            },
+            "ServerName": {
+                "type": "string",
+                "defaultValue": ""
+            },
+            "DatabaseName": {
+                "type": "string",
+                "defaultValue": ""
+            },
+            "Command": {
+                "type": "string"
+            }
+        },
+        "annotations": [],
+        "lastPublishTime": "2022-08-04T12:10:48Z"
+    },
+    "type": "Microsoft.DataFactory/factories/pipelines"
+}
+
