@@ -7,7 +7,7 @@ This repository contains code to accelerate an organization’s journey to build
 ## Logical Architecture 
  ![Logical Architecture](./images/Logical%20Architecture.png)
 - **Azure Data Factory** uses the metadata stored in **Azure SQL DB** and pulls data from different data sources.
-- Azure Data Factory stores all the source data into **Data Lake** Raw zone. After some transformations, data gets stored in Data Lake Bronze and Silver zone.
+- Azure Data Factory stores all the source data into **Data Lake** Staging zone. After some transformations, data gets stored in Cleansed and then Synapse zone.
 - Using **Synapse**, Data Factory does some transformations, and the final data gets stored into Synapse Datawarehouse.
 - Data stored into Synapse Datawarehouse will be available for Power BI visualization.
 
@@ -184,7 +184,7 @@ You can refer below screenshot to create pipeline to copy data from source to Sy
  
 	![Master Pipeline](./images/Master%20Pipeline.png)
 
-There are 4 types of pipelines that can be build depending on the requirements.
+There are 3 types of pipelines that can be build depending on the requirements.
 1.	Historical Pipelines
 2.	Incremental Pipelines
 3.	Archive pipelines
